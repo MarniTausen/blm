@@ -1,6 +1,6 @@
 ---
 title: "Bayesian linear regression"
-author: "Your Name"
+author: "Marni Tausen"
 date: "`r Sys.Date()`"
 output:
   md_document:
@@ -11,102 +11,19 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Bayesian linear regresssion
+### Blm package
 
-This is a skeleton package you can use as the starting point for building your Bayesian linear regression package. You should *fork* the repository to make your own version and then later use *pull requests* to hand in your project exercises and the final package.
+Some text descripting the package in general.
 
-The rest of this README file contains documentation for using this repository as a package template and for how you should hand in exercises. You shouldn't keep this text -- you can always find it again in the original repository -- but once you have read it you should update it and use this file for the documentation of your own package. When you update the documentation you should delete the `figures` directory. It just contains figures for this documentation.
+### Installation
 
-### Forking a repository
+Description of how to install the package.
 
-Unlike the exercises repositories you have used so far, that are isolated from the template they were based upon, this repository is tied up to an original repository. This one.
+### Quick Guide
 
-With the exercises you had your very own repository and there were never any intent to update your version based on mine, or of merging your changes with my code. This is not the typical pattern used when working with source code in a git setting. There the idea is more that we have a network of versions of the code and we can merge code from one version to another.
+A quick guide of how to use the package.
+Short and simple. Very straight forward.
 
-The typical pattern is that there is a main repository, which in this case would be this repository, and then forks of that. The forks are really just other repositories, but ones you can use to push your changes to. You create a forked repository by clicking on the **fork** button at the top of the repository web page.
+### Features
 
-![Fork button](figures/fork.png)
-
-This creates a new repository that lives at your own GitHub account. Your repository and mine live separate lives. You can push changes to your own version and they won't be pushed to mine, and changes I make to this repository will not automatically be merged into your repository.
-
-You *can* pull any changes I make to this repository into your own version -- something I don't plan to have happen in this class -- but you cannot push your changes into my version. You don't have write permission to make changes to my code, after all.
-
-If I *do* happen to make changes to this repository it will show up on the page of your repository just above the list of files.
-
-![Repository behind original](figures/behind.png)
-
-If this happens you can click the **Compare** button and switch brances to make a pull request to yourself that include my changes ... I don't expect it to happen, so that is all I will say about that.
-
-Since you cannot push your changes into repositories you do not control, the typical pattern is instead to request from a repository maintainer that he or she pulls changes into the main repository from your fork. I won't actually pull your code into this repository in this class, but we will use such pull requests as the way to hand in project exercises.
-
-### Making pull requests
-
-To make a pull request you push the **New Pull request** button.
-
-![New pull request](figures/new-pull-request.png)
-
-This takes you to a page that should look similar to the one shown below:
-
-![Pull request page](figures/new-pull-request-first-page.png)
-
-Here you simply have to press the **Create pull request** button. This will then send you to a page where you can describe the pull request.
-
-![Creating a pull request](figures/creating-pull-request.png)
-
-In this class you only need to make one such pull request, and I would prefer if the title you give it is your name -- that way I know which pull request was made by each one of you. Normaly, when sharing code on GitHub the pull request is used to describe that changes you have made to a repository and explain why you think it is worth merging into the main code base.
-
-Below the field for documentation there is another green button. Press this to actually create the pull request.
-
-![Create pull request button](figures/create-button.png)
-
-Creating the pull request now sends you to a page that looks like this:
-
-![New pull request](figures/pull-request.png)
-
-In your case you won't have the option of merging the pull request. I have that because I can modify both my own repository and this class repository. You will have a similar page, though. It shows the history of what you have done to your code and the comments you have made when creating the pull request.  There is also a message about code being checked. I describe that below.
-
-This pull request remains open until either I merge it into this repository -- which I do not plan to do -- or until you delete it. Don't delete it, though, since we will use it to hand in exercises. Whenever you push changes to your repository it will also show up on this pull request, so you now have an automatic way of submitting your handins. You just push changes to GitHub.
-
-(Strictly speaking it is only changes pushed to the branch that was used in the pull request, but since we are not using branches here it won't matter. You can just push your changes and they should show up on the pull request and I will be informed about them).
-
-I will use the pull request to comment on your code -- I can do that both by adding comment to individual code lines or through general comments, and I can even commit my own changes to your pull request -- and you can add comments to the pull request at any time.
-
-
-### Continuous integration (CI)
-
-I have set up this package to use features of GitHub called *continuous integration*, which essentially means that whenever you push changes to the GitHub repository, GitHub will run a number of consistency checks. How to use this is beyond the scope of this class, so I will not explain it in detail. The consequence for you is that whenever you make a pull request GitHub will check the quality of your code. This will take a while since it first has to build a clean R installation, then install all the R packages your package relies on, and then run your unit tests and check your package. After that, though, the pull request will be extended with the result of these tests.
-
-The message shown above about the code still being checked is a consequence of that. If the tests pass, it will turn into a message that looks like this:
-
-![Passed CI](figures/passed-CI.png)
-
-The checks made for this repository is just the unit tests you write and a package consistency check. You should always try to make sure that when you hand in a pull request, these automatic tests are passed. You might not be able to guarantee it, since you cannot see the consquences of the changes until you push them, but if you see that the checks are failing you should fix them. If the automatic tests complain about your code it is a safe bet that I will complain about it as well.
-
-If you want to connect the checking to your own repositories you can do so using [TravisCI](http://www.travis-ci.com). You can sign in using your github account and then connect the repositories you want to have checked. You can read the Travis documentation for details.
-
-After your pull request is checked, I have set up a coverage check. This checks how much of your code is actually run by your unit tests. The result of this check shows up a little after the checks have passed, and if 100% of your code is covered it should look like this:
-
-![Full coverage](figures/full-coverage.png)
-
-This coverage check is run by TravisCI but analysed by [Coveralls](https://coveralls.io/). If you want to set it up for your own repositories you can go there, again you can sign in using your GitHub account and then select which repositories it should have access to. By itself this doesn't set up the coverage test, this has to be done through TravisCI, but you can read the documentation for how to do it (or look at the `.travis.yml` file in this repository).
-
-If you do not achieve 100% coverage you will be shown how much (or how little) coverage you are reaching.
-
-![Low coverage](figures/no-coverage.png)
-
-If your test coverage is low, it means that you are not really testing your code, so you should always aim at getting as close to 100% as you possibly can.
-
-To get a report of the coverage of your tests you can install the package `covr` and use
-
-```r
-library(covr)
-package_coverage()
-```
-
-or get a window with the report using
-
-```r
-library(covr)
-shine(package_coverage())
-```
-
+A list of features the package contains.
