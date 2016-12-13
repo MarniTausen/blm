@@ -11,7 +11,7 @@
 #' @import stats
 #' @export
 update <- function(model, prior, beta, ...) {
-    data <- model.frame(model)
+    data <- model.frame(model, ...)
     mx <- model.matrix(model, ...)
     Sxy <- solve(prior$Sigma + beta * t(mx) %*% mx)
     mxy <- beta * Sxy %*% t(mx) %*% data[,1]

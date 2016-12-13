@@ -12,12 +12,12 @@
 #' @export
 blm <- function(model, alpha, beta, ...) {
 
-    prior <- make_prior(model, alpha)
+    prior <- make_prior(model, alpha, ...)
     posterior <- update(model, prior, beta, ...)
 
     obj <- list(coefficients=t(posterior$mu),
                 variances=posterior$Sigma,
-                model=model.frame(model),
+                model=model.frame(model, ...),
                 prior=prior,
                 posterior=posterior,
                 terms=model,

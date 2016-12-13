@@ -4,12 +4,14 @@
 \alias{make_prior}
 \title{Make the prior distribution}
 \usage{
-make_prior(model, alpha)
+make_prior(model, alpha, ...)
 }
 \arguments{
 \item{model}{A formula describing the model.}
 
 \item{alpha}{Hyper-parameter used in the the prior}
+
+\item{...}{Additional parameters, specifically data.}
 }
 \value{
 a prior distribution, list of mu and Sigma
