@@ -3,13 +3,15 @@ Type: Package
 Title: Bayesian Linear Regression
 Version: 0.1.0
 Date: 2016-11-02
-Authors@R: person("Firstname", "Lastname", email = "your@mail.address", role = c("cre", "aut"))
+Authors@R: person("Marni", "Tausen", email = "Marni16ox@gmail.com", role = c("cre", "aut"))
 Description: Package for fitting Bayesian linear models.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
+Imports: stats
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat,
+    ggplot2
 RoxygenNote: 5.0.1
