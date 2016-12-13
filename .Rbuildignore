@@ -3,3 +3,6 @@
 ^figures/*$
 ^README.Rmd$
 ^.travis.yml$
+^autocompile.R$
+^compile.R$
+^compile.sh$

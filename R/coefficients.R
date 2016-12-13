@@ -6,7 +6,7 @@
 #'
 #' @return vector of coefficients
 #' @export
-coefficients.blm <- coef.blm <- function(x){
+coef.blm <- function(x){
     n <- colnames(x$coefficients)
     coefs <- as.vector(x$coefficients)
     names(coefs) <- n

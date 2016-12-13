@@ -12,6 +12,8 @@
 \item{parm}{A specification of which parameters are to be given confidence intervals, either a vector of numbers or a vector of names. If missing, all parameters are considered. If the name of the response variable is given, then the confidence intervals of the fitted values values, or new predicted values if a data frame of new observations is given.}
 
 \item{level}{Confidence interval level of interest, corresponds to a percentage.}
+
+\item{...}{Additional parameters}
 }
 \value{
 Matrix of confidence intervals, or a list of 2 vectors with upper-bound and lower-bound values for the fitted, or predicted variables.
