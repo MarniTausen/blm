@@ -4,12 +4,16 @@
 \alias{blm}
 \title{Bayesian linear model.}
 \usage{
-blm(model, ...)
+blm(model, alpha, beta, ...)
 }
 \arguments{
 \item{model}{A formula describing the model.}
 
-\item{...}{Additional data, for example a data frame. Feel free to add other options.}
+\item{alpha}{Hyper-parameter for the prior}
+
+\item{beta}{Hyper-parameter for the accuracy of the data points.}
+
+\item{...}{Additional data, for example a data frame.}
 }
 \value{
 A fitted model.
