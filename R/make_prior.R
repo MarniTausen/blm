@@ -6,6 +6,7 @@
 #' @param alpha   Hyper-parameter used in the the prior
 #'
 #' @return a prior distribution, list of mu and Sigma
+#' @import stats
 #' @export
 make_prior <- function(model, alpha){
     n <- ncol(model.matrix(model))

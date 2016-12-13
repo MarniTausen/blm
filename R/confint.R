@@ -8,6 +8,7 @@
 #' @param ...       Additional parameters
 #'
 #' @return Matrix of confidence intervals, or a list of 2 vectors with upper-bound and lower-bound values for the fitted, or predicted variables.
+#' @import stats
 #' @export
 confint.blm <- function(object, parm, level = 0.95, ...){
 

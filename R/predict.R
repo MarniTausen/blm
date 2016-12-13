@@ -7,6 +7,7 @@
 #' @param ...          Additional parameters, in particular new data to predict from.
 #'
 #' @return predicted values
+#' @import stats
 #' @export
 predict.blm <- function(object, variances=FALSE, ...){
 

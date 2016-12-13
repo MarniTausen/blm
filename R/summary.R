@@ -6,6 +6,7 @@
 #' @param ...       Additional variables
 #'
 #' @return summary.blm class, containing the summary statistics
+#' @import stats
 #' @export
 summary.blm <- function(object, ...){
 

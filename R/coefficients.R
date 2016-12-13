@@ -2,13 +2,14 @@
 #'
 #' Retrieve coefficients from the blm class
 #'
-#' @param x    object of class blm
+#' @param object    object of class blm
+#' @param ...       Additional parameters
 #'
 #' @return vector of coefficients
 #' @export
-coef.blm <- function(x){
-    n <- colnames(x$coefficients)
-    coefs <- as.vector(x$coefficients)
+coef.blm <- function(object, ...){
+    n <- colnames(object$coefficients)
+    coefs <- as.vector(object$coefficients)
     names(coefs) <- n
     coefs
 }

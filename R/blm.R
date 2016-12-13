@@ -8,6 +8,7 @@
 #' @param ...     Additional data, for example a data frame.
 #'
 #' @return A fitted model.
+#' @import stats
 #' @export
 blm <- function(model, alpha, beta, ...) {
 

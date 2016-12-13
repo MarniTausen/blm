@@ -6,5 +6,6 @@
 #' @param ...     Additional parameters.
 #'
 #' @return The deviance of the object
+#' @import stats
 #' @export
 deviance.blm <- function(object, ...) sum((object$model[,1]-fitted(object, ...))^2)

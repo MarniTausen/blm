@@ -6,5 +6,6 @@
 #' @param ...       Additional parameters
 #'
 #' @return a vector of the residuals
+#' @import stats
 #' @export
 residuals.blm <- function(object, ...) object$model[,1]-fitted(object)

@@ -8,6 +8,7 @@
 #' @param ...      Additional data, for example a data frame.
 #'
 #' @return Posterior distribution, list of mu and Sigma
+#' @import stats
 #' @export
 update <- function(model, prior, beta, ...) {
     data <- model.frame(model)

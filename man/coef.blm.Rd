@@ -4,10 +4,12 @@
 \alias{coef.blm}
 \title{Coefficients for the blm class}
 \usage{
-\method{coef}{blm}(x)
+\method{coef}{blm}(object, ...)
 }
 \arguments{
-\item{x}{object of class blm}
+\item{object}{object of class blm}
+
+\item{...}{Additional parameters}
 }
 \value{
 vector of coefficients
