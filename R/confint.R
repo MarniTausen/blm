@@ -14,11 +14,7 @@ confint.blm <- function(object, parm, level = 0.95, ...){
 
     response = names(object$model)[1]
 
-    if(level<0.5){
-        a <- c(level/2, 1-level/2)
-    } else {
-        a <- c((1-level)/2, 1-(1-level)/2)
-    }
+    a <- c((1-level)/2, 1-(1-level)/2)
 
     variables = names(coefficients(object))
     if(missing(parm)) parm = variables

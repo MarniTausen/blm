@@ -78,6 +78,12 @@ test_that("test the plot function", {
     a <- 0.6; b <- 1;
     y <- 0.6*x+b
     fit <- blm(y ~ x, 1, 1)
-    plot(fit)
 
+    plot(fit)
+    plot(fit, ggplot=FALSE)
+
+    z <- rnorm(n, 40, 10)
+    fit <- blm(y ~ x + z, 1, 1)
+
+    plot(fit)
 })
