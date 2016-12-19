@@ -24,7 +24,7 @@ confint.blm <- function(object, parm, level = 0.95, ...){
             list(lb=qnorm(a[1], fit$mean, fit$var),
                  ub=qnorm(a[2], fit$mean, fit$var))
         } else {
-            fit <- predict(object, variances=TRUE, ...)
+            fit <- predict(object, ..., variances=TRUE)
             list(lb=qnorm(a[1], fit$mean, fit$var),
                  ub=qnorm(a[2], fit$mean, fit$var))
         }

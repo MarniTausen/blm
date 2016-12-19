@@ -4,14 +4,12 @@
 \alias{predict.blm}
 \title{Predict new data from blm model}
 \usage{
-\method{predict}{blm}(object, variances = FALSE, ...)
+\method{predict}{blm}(object, ...)
 }
 \arguments{
 \item{object}{Blm object}
 
-\item{variances}{Whether to return variances aswell}
-
-\item{...}{Additional parameters, in particular new data to predict from.}
+\item{...}{Additional parameters, in particular new data to predict from, and a variable called variances, which states whether variances of the predicted values should be included.}
 }
 \value{
 predicted values
