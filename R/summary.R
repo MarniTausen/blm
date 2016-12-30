@@ -24,18 +24,3 @@ summary.blm <- function(object, ...){
     class(obj) <- "summary.blm"
     obj
 }
-
-print.summary.blm <- function(x) {
-    cat("blm model: "); print(x$terms)
-    cat("\n")
-
-    cat("Coefficients:\n");
-    ct <- x$coefficients
-    print(ct)
-
-    cat("\nConfindence intervals: \n")
-    print(x$confint)
-
-    cat("\nR-squared:", x$Rsquared)
-    cat("\n")
-}

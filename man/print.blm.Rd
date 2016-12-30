@@ -4,10 +4,12 @@
 \alias{print.blm}
 \title{Print for blm objects}
 \usage{
-\method{print}{blm}(x)
+\method{print}{blm}(x, ...)
 }
 \arguments{
 \item{x}{a blm object}
+
+\item{...}{Additional options}
 }
 \value{
 Nothing

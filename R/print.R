@@ -3,10 +3,11 @@
 #' Prints blm objects as intended
 #'
 #' @param x    a blm object
+#' @param ...  Additional options
 #'
 #' @return Nothing
 #' @export
-print.blm <- function(x){
+print.blm <- function(x, ...){
     cat("blm model: "); print(x$terms)
     cat("\n")
     cat("Posterior:\n")

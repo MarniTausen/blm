@@ -4,10 +4,12 @@
 \alias{print.summary.blm}
 \title{Print summary.blm}
 \usage{
-\method{print}{summary.blm}(x)
+\method{print}{summary.blm}(x, ...)
 }
 \arguments{
 \item{x}{a summary.blm object}
+
+\item{...}{additional options}
 }
 \value{
 nothing
