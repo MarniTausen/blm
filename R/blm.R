@@ -27,14 +27,6 @@ blm <- function(model, alpha, beta, ...) {
     obj
 }
 
-print.blm <- function(x){
-    cat("blm model: "); print(x$terms)
-    cat("\n")
-    cat("Posterior:\n")
-    print(t(x$posterior$mu)); cat("\n")
-    print(x$posterior$Sigma)
-}
-
 plot.blm <- function(x, ...){
     if(is.null(list(...)$ggplot)) { ggplot = TRUE } else { ggplot = list(...)$ggplot }
     if(requireNamespace("ggplot2", quietly = TRUE) && ggplot==TRUE) {

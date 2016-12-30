@@ -15,7 +15,11 @@ summary.blm <- function(object, ...){
     cf <- confint(object)
     Rsquared <- 1-sum(residuals(object)^2)/sum((object$model[,1]-mean(object$model[,1]))^2)
 
-    obj <- list(terms=object$terms, confint=cf, coefficients=t(object$coefficients),
+    statstable <- t(object$coefficients)
+    statstable <- cbind(statstable, diag(object$posterior$Sigma))
+    colnames(statstable) <- c("Mean", "Variance")
+
+    obj <- list(terms=object$terms, confint=cf, coefficients=statstable,
                 Rsquared=Rsquared)
     class(obj) <- "summary.blm"
     obj
@@ -26,8 +30,7 @@ print.summary.blm <- function(x) {
     cat("\n")
 
     cat("Coefficients:\n");
-    ct = x$coefficients
-    colnames(ct) <- c("Mean")
+    ct <- x$coefficients
     print(ct)
 
     cat("\nConfindence intervals: \n")

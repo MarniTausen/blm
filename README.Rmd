@@ -8,22 +8,91 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, out.format='html', comment='')
 ```
 
-### Blm package
+### blm package
 
-Some text descripting the package in general.
+The blm package is an R package for Bayesian linear models, which has
+the same kind of interface as lm and glm in R. The difference of the
+Bayesian model, is that we do not directly estimate the value of the
+parameters, instead we estimate an normal distribution giving the
+mean and the variance for each of the parameters.
 
 ### Installation
 
-Description of how to install the package.
+The package is currently only available through github. Therefore the
+easiest way to install the package, is to use the devtools package.
+Skip the installation part, if already installed.
+```{r, eval=FALSE}
+install.packages("devtools")
+library(devtools)
+```
+
+Using devtools, you can install the package using install_github().
+
+```{r, eval=FALSE}
+install_github("MarniTausen/blm")
+```
+
+and voila! The package is installed.
 
 ### Quick Guide
+
+The blm package uses the same interface as the lm and glm functions in
+R, and therefore functions very similarly.
+
+First to load the package you can use:
+
+```{r}
+
+library(blm)
+
+```
+
+To do the blm model, you use the blm function, which takes in the
+parameters, alpha and beta. If uncertain about the alpha and beta
+hyper-parameters, setting them both to 1 gives a neutral effect.
+
+```{r, echo=FALSE}
+x <- 1:100
+y <- rnorm(100, x)
+```
+
+```{r}
+
+blm(y ~ x, 1, 1)
+
+```
+
+```{r}
+
+summary(blm(y ~ x, 1, 1))
+
+```
 
 A quick guide of how to use the package.
 Short and simple. Very straight forward.
 
 ### Features
 
-A list of features the package contains.
+A list of features the package contains, and a short description of
+their purpose and function. For a more indepth description check the
+documentation with ?x.blm, or the github wiki page for the function.
+
+* blm
+	* Description
+* coef (coefficients)
+	* Description
+* confint
+	* Description
+* deviance
+	* Description
+* fitted
+	* Description
+* predict
+	* Description
+* residuals
+	* Description
+* summary
+	* Description
