@@ -10,10 +10,15 @@
 #' @return A fitted model.
 #' @import stats
 #' @export
-blm <- function(model, alpha, beta, ...) {
+blm <- function(model, alpha=1, beta=1, ...) {
+
+    if(class(alpha)=="data.frame" || class(beta)=="data.frame") {
+        stop("Please include data using: blm(formula, data=your_data)
+  or by: blm(formula, alpha, beta, your_data)")
+    }
 
     prior <- make_prior(model, alpha, ...)
-    posterior <- update(model, prior, beta, ...)
+    posterior <- update_prior(model, prior, beta, ...)
 
     obj <- list(coefficients=t(posterior$mu),
                 variances=posterior$Sigma,

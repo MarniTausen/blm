@@ -9,6 +9,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, out.format='html', comment='')
+set.seed(600)
 ```
 
 ### blm package
@@ -42,7 +43,7 @@ and voila! The package is installed.
 The blm package uses the same interface as the lm and glm functions in
 R, and therefore functions very similarly.
 
-First to load the package you can use:
+First to load the package:
 
 ```{r}
 
@@ -50,24 +51,22 @@ library(blm)
 
 ```
 
-To do the blm model, you use the blm function, which takes in the
-parameters, alpha and beta. If uncertain about the alpha and beta
-hyper-parameters, setting them both to 1 gives a neutral effect.
-
 ```{r, echo=FALSE}
 x <- 1:100
 y <- rnorm(100, x)
 ```
 
+To construct the blm model use the blm function and feed it a
+formula, with the structure **response** ~ **predictors**.
 ```{r}
 
-blm(y ~ x, 1, 1)
+blm(y ~ x)
 
 ```
-
+To extract summary statistics of the blm model, we can combine
 ```{r}
 
-summary(blm(y ~ x, 1, 1))
+summary(blm(y ~ x))
 
 ```
 

@@ -26,8 +26,6 @@ test_that("ensure errors work", {
     a <- 0.6; b <- 1;
     y <- 0.6*x+b
     dat <- data.frame(x = x, y = y)
-    expect_error(blm(y ~ x))
-    expect_error(blm(y ~ x, 1))
     expect_error(blm(y ~ x, data))
     expect_error(blm(y ~ x, 1, data))
 

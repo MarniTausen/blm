@@ -1,7 +1,7 @@
 Bayesian linear regression
 ================
 Marni Tausen
-2016-12-30
+2017-01-12
 
 ### blm package
 
@@ -28,52 +28,47 @@ and voila! The package is installed.
 
 The blm package uses the same interface as the lm and glm functions in R, and therefore functions very similarly.
 
-First to load the package you can use:
+First to load the package:
 
 ``` r
 library(blm)
 ```
 
-
-    Attaching package: 'blm'
-
-    The following object is masked from 'package:stats':
-
-        update
-
-To do the blm model, you use the blm function, which takes in the parameters, alpha and beta. If uncertain about the alpha and beta hyper-parameters, setting them both to 1 gives a neutral effect.
+To construct the blm model use the blm function and feed it a formula, with the structure **response** ~ **predictors**.
 
 ``` r
-blm(y ~ x, 1, 1)
+blm(y ~ x)
 ```
 
     blm model: y ~ x
 
     Posterior:
          (Intercept)        x
-    [1,] -0.09289503 1.000389
+    [1,]  -0.1467252 1.004073
 
                   (Intercept)             x
     (Intercept)  0.0390212100 -5.824044e-04
     x           -0.0005824044  1.164809e-05
 
+To extract summary statistics of the blm model, we can combine
+
 ``` r
-summary(blm(y ~ x, 1, 1))
+summary(blm(y ~ x))
 ```
 
     blm model: y ~ x
 
     Coefficients:
-                       Mean     Variance
-    (Intercept) -0.09289503 3.902121e-02
-    x            1.00038861 1.164809e-05
+                      Mean     Variance
+    (Intercept) -0.1467252 3.902121e-02
+    x            1.0040725 1.164809e-05
 
     Confindence intervals: 
                      2.5 %    97.5 %
-    (Intercept) -0.4800621 0.2942721
-    x            0.9936994 1.0070778
+    (Intercept) -0.5338923 0.2404419
+    x            0.9973833 1.0107618
 
-    R-squared: 0.9988448
+    R-squared: 0.9988067
 
 A quick guide of how to use the package. Short and simple. Very straight forward.
 

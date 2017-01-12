@@ -10,7 +10,7 @@
 #' @return Posterior distribution, list of mu and Sigma
 #' @import stats
 #' @export
-update <- function(model, prior, beta, ...) {
+update_prior <- function(model, prior, beta, ...) {
     data <- model.frame(model, ...)
     mx <- model.matrix(model, ...)
     Sxy <- solve(prior$Sigma + beta * t(mx) %*% mx)
