@@ -3,18 +3,23 @@
 #' Predict new data points from a blm model, if no new data is given returns the fitted response variables. If new data is given, it gives predicted response variables.
 #'
 #' @param object       Blm object
-#' @param data         Data to be predicted on. If left empty will return the fitted values.
-#' @param variances    Boolean variable, which states whether variances of the predicted values should be included.
+#' @param ...          Additional parameters such as data to be predicted on called 'data'. If left empty will return the fitted values. Boolean variable, which states whether variances of the predicted values should be included.
 #'
 #' @return predicted values
 #' @import stats
 #' @export
-predict.blm <- function(object, data=NULL, variances=FALSE){
+predict.blm <- function(object, ...){
+    parameters <- list(...)
     mxy <- object$posterior$mu
     Sxy <- object$posterior$Sigma
 
-    modeldata = data
-    if(is.null(data)) modeldata = object$model
+    findDF <- Vectorize(function(x) class(x)=="data.frame")
+
+    modeldata <- parameters$data
+    if(is.null(modeldata)) {
+        modeldata <- object$model
+        if(sum(unlist(findDF(parameters)))==1) modeldata = parameters[[findDF(parameters)]]
+    }
 
     formula <- object$terms
     responseless.formula <- delete.response(terms(formula))
@@ -28,6 +33,11 @@ predict.blm <- function(object, data=NULL, variances=FALSE){
         sds[i] <- 1/object$beta + (t(theta_x[i,]) %*% Sxy %*% theta_x[i,])
     }
 
+    if(is.null(parameters$variances)) {
+        variances = FALSE
+    } else {
+        variances = parameters$variances
+    }
     if(variances==TRUE) return(list(mean=means, var=sds))
 
     means

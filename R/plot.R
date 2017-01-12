@@ -13,19 +13,19 @@ plot.blm <- function(x, ...){
         data = x$model
         variables = colnames(x$model)
 
-        c = Inf
+        count = Inf
         regression_data = list()
 
         for(var in variables[-1]){
-            if(c==Inf){
+            if(count==Inf){
                 min <- min(data[,var]); max = max(data[,var])
                 sequence <- seq(min, max, by=0.01)
-                c <- length(sequence)
+                count <- length(sequence)
                 regression_data <- c(regression_data, list(sequence))
             } else {
                 min <- min(data[,var]); max = max(data[,var])
-                sequence <- seq(min, max, by=(max-min)/c)
-                regression_data <- c(regression_data, list(sequence[1:c]))
+                sequence <- seq(min, max, by=(max-min)/count)
+                regression_data <- c(regression_data, list(sequence[1:count]))
             }
         }
 
