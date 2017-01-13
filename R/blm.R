@@ -12,7 +12,7 @@
 #' @export
 blm <- function(model, alpha=1, beta=1, ...) {
 
-    if(class(alpha)=="data.frame" || class(beta)=="data.frame") {
+    if(class(alpha)!="numeric" || class(beta)!="numeric") {
         stop("Please include data using: blm(formula, data=your_data)
   or by: blm(formula, alpha, beta, your_data)")
     }
