@@ -9,3 +9,4 @@
 ^README.HTML$
 ^README.pdf$
 ^profile.R$
+^README_files/*$
