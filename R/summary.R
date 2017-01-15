@@ -33,8 +33,8 @@ summary.blm <- function(object, ...){
         for(i in seq_along(pvalues)[!collected]){
             B <- includesZero(ccf[i,])
             if(B){
-                if(levels[l]<0.90) pvalues[i] <- ">0.10"
                 pvalues[i] <- paste("<", 1-levels[l], sep="")
+                if(levels[l]<0.90) pvalues[i] <- ">0.10"
                 signfic[i] <- slevels[l]
                 collected[i] <- TRUE
             }
