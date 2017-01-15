@@ -51,27 +51,30 @@ library(blm)
 
 ```
 
-```{r, echo=FALSE}
-x <- rnorm(100, 50, 20)
-y <- rnorm(100, x)
-```
-
 To construct the blm model use the blm function and feed it a
-formula, with the structure **response** ~ **predictors**.
+formula, with the structure **response** ~ **predictors**. Here is a
+simple example using the iris dataset.
 ```{r}
+data(iris)
 
-blm(y ~ x)
+blm(Sepal.Length ~ Petal.Length + Sepal.Width, data=iris)
 
 ```
-To extract summary statistics of the blm model, we can combine
+To extract summary statistics of the blm model, we can use the summary
+function on the blm model.
 ```{r}
 
-summary(blm(y ~ x))
+summary(blm(Sepal.Length ~ Petal.Length + Sepal.Width, data=iris))
 
 ```
+Its also possible to plot the blm model, and see the
+regression. Note: the confidence intervals and regression might not
+always be accurate, especially with multiple predictors.
+```{r}
 
-A quick guide of how to use the package.
-Short and simple. Very straight forward.
+plot(blm(Sepal.Length ~ Petal.Length + Sepal.Width, data=iris))
+
+```
 
 ### Features
 

@@ -34,45 +34,56 @@ First to load the package:
 library(blm)
 ```
 
-To construct the blm model use the blm function and feed it a formula, with the structure **response** ~ **predictors**.
+To construct the blm model use the blm function and feed it a formula, with the structure **response** ~ **predictors**. Here is a simple example using the iris dataset.
 
 ``` r
-blm(y ~ x)
+data(iris)
+
+blm(Sepal.Length ~ Petal.Length + Sepal.Width, data=iris)
 ```
 
-    blm model: y ~ x
+    blm model: Sepal.Length ~ Petal.Length + Sepal.Width
 
     Posterior:
-         (Intercept)        x
-    [1,]  -0.5126034 1.008737
+         (Intercept) Petal.Length Sepal.Width
+    [1,]    1.531317    0.5035944   0.7880398
 
-                 (Intercept)             x
-    (Intercept)  0.069098145 -1.168911e-03
-    x           -0.001168911  2.308141e-05
+                 (Intercept) Petal.Length  Sepal.Width
+    (Intercept)   0.34708601 -0.015141624 -0.093490305
+    Petal.Length -0.01514162  0.002259808  0.002207875
+    Sepal.Width  -0.09349030  0.002207875  0.028069029
 
-To extract summary statistics of the blm model, we can combine
+To extract summary statistics of the blm model, we can use the summary function on the blm model.
 
 ``` r
-summary(blm(y ~ x))
+summary(blm(Sepal.Length ~ Petal.Length + Sepal.Width, data=iris))
 ```
 
-    blm model: y ~ x
+    blm model: Sepal.Length ~ Petal.Length + Sepal.Width
 
     Coefficients:
-                      Mean     Variance p-value     
-    (Intercept) -0.5126034 6.909815e-02   <0.05    *
-    x            1.0087373 2.308141e-05 <0.0001 ****
+                      Mean    Variance p-value     
+    (Intercept)  1.5313165 0.347086008  <0.001  ***
+    Petal.Length 0.5035944 0.002259808 <0.0001 ****
+    Sepal.Width  0.7880398 0.028069029 <0.0001 ****
     ------ 
     Signif. codes:  0 '****' 0.0001 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
     Confindence intervals: 
-                    2.5 %      97.5 %
-    (Intercept) -1.027810 0.002603053
-    x            0.999321 1.018153598
+                     2.5 %   97.5 %
+    (Intercept)  0.3766232 2.686010
+    Petal.Length 0.4104227 0.596766
+    Sepal.Width  0.4596711 1.116409
 
-    R-squared: 0.9978489
+    R-squared: 0.83106
 
-A quick guide of how to use the package. Short and simple. Very straight forward.
+Its also possible to plot the blm model, and see the regression. Note: the confidence intervals and regression might not always be accurate, especially with multiple predictors.
+
+``` r
+plot(blm(Sepal.Length ~ Petal.Length + Sepal.Width, data=iris))
+```
+
+![](README_files/figure-markdown_github/unnamed-chunk-6-1.png)
 
 ### Features
 
