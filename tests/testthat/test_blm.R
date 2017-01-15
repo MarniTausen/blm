@@ -28,7 +28,8 @@ test_that("ensure errors work", {
     dat <- data.frame(x = x, y = y)
     expect_error(blm(y ~ x, dat))
     expect_error(blm(y ~ x, 1, dat))
-
+    expect_error(blm(y ~ x, 1, 1, dat))
+    expect_error(blm(y ~ x, prior=list(mu=c(0), Sigma=c(0))))
 })
 
 test_that("introduction of data", {
@@ -62,7 +63,7 @@ test_that("introduction of data", {
 
     # Adding additional data
     data = rbind(data, c(1, 2, 3))
-    fit4 <- blm(profit ~ price + value, 1, 1, data)
+    fit4 <- blm(profit ~ price + value, data=data)
     expect_equal(sort(colnames(fit4$model)), sort(variables))
     expect_false(isTRUE(all.equal(nrow(fit4$model), n)))
     expect_equal(nrow(fit4$model), n+1)
@@ -81,7 +82,7 @@ test_that("test the plot function", {
     plot(fit, ggplot=FALSE)
 
     z <- rnorm(n, 40, 10)
-    fit <- blm(y ~ x + z, 1, 1)
+    fit <- blm(y ~ x + z)
 
     plot(fit)
 })

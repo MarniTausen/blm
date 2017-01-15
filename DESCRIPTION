@@ -1,7 +1,7 @@
 Package: blm
 Type: Package
 Title: Bayesian Linear Regression
-Version: 0.1.0
+Version: 0.9.0
 Date: 2016-11-02
 Authors@R: person("Marni", "Tausen", email = "Marni16ox@gmail.com", role = c("cre", "aut"))
 Description: Package for fitting Bayesian linear models.

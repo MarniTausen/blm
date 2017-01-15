@@ -1,7 +1,7 @@
 Bayesian linear regression
 ================
 Marni Tausen
-2017-01-13
+2017-01-15
 
 ### blm package
 
@@ -44,11 +44,11 @@ blm(y ~ x)
 
     Posterior:
          (Intercept)        x
-    [1,]  -0.1467252 1.004073
+    [1,]  -0.5126034 1.008737
 
-                  (Intercept)             x
-    (Intercept)  0.0390212100 -5.824044e-04
-    x           -0.0005824044  1.164809e-05
+                 (Intercept)             x
+    (Intercept)  0.069098145 -1.168911e-03
+    x           -0.001168911  2.308141e-05
 
 To extract summary statistics of the blm model, we can combine
 
@@ -59,25 +59,27 @@ summary(blm(y ~ x))
     blm model: y ~ x
 
     Coefficients:
-                      Mean     Variance
-    (Intercept) -0.1467252 3.902121e-02
-    x            1.0040725 1.164809e-05
+                      Mean     Variance p-value     
+    (Intercept) -0.5126034 6.909815e-02   <0.05    *
+    x            1.0087373 2.308141e-05 <0.0001 ****
+    ------ 
+    Signif. codes:  0 '****' 0.0001 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
     Confindence intervals: 
-                     2.5 %    97.5 %
-    (Intercept) -0.5338923 0.2404419
-    x            0.9973833 1.0107618
+                    2.5 %      97.5 %
+    (Intercept) -1.027810 0.002603053
+    x            0.999321 1.018153598
 
-    R-squared: 0.9988067
+    R-squared: 0.9978489
 
 A quick guide of how to use the package. Short and simple. Very straight forward.
 
 ### Features
 
-A list of features the package contains, and a short description of their purpose and function. For a more indepth description check the documentation with ?x.blm, or the github wiki page for the function.
+A list of features the package contains, and a short description of their purpose and function. For a more indepth description check the documentation with ?x, either for function, or follow the description of the generic documentation.
 
 -   blm
-    -   The core function of the package. Produces the Bayesian linear model (blm) and the blm object. It takes in the parameters: blm(formula, alpha=1, beta=1, ...), where ... includes the parameter data, which allows the inclusion of a data.frame for the data in the formula. For an indepth look at the function of alpha and beta, look at the next section.
+    -   The core function of the package. Produces the Bayesian linear model (blm) and the blm object. It takes in the parameters: blm(model, alpha=1, beta=1, prior=NULL, ...), where ... includes the parameter data, which allows the inclusion of a data.frame for the data in the formula. For an indepth look at the function of alpha and beta, look at the next section. The prior parameter allows the user to specific more specially what the prior is.
 -   coef (coefficients)
     -   coef, gives the coefficients of the model when used on a blm class object. This returns a vector with the names of the coefficients.
 -   confint
@@ -110,7 +112,7 @@ There are two objects/classes included in the package, which contain a lot of at
     -   **coefficients**: *coefficients stats, mean, variance*
     -   **Rsquared**: *R-squared statistics of the fit*
 
-Finally there are two internal functions used for the actual Bayesian linear calculations. A description of how these functions work, and how parameters alpha and beta influence the results.
+Finally there are two internal functions used for the actual Bayesian linear calculations. A description of how these functions work, and how parameters alpha and beta influence the results, is explained in the next section.
 
 -   make\_prior
     -   Initialize the prior distribution. Usage is as follows: make\_prior(model, alpha, ...), where model is the formula, and alpha is the hyper-parameter. It returns a prior distribution, with a vector of means and a covariance matrix.
@@ -119,4 +121,18 @@ Finally there are two internal functions used for the actual Bayesian linear cal
 
 ### Bayesian properties
 
-A description of the Bayesian properties of the model, and two internal core functions, which do the Bayesian calculations.
+In The Bayesian model we do not directly estimate the value of the parameters, instead we estimate an normal distribution giving the mean and the variance for each of the parameters.
+
+In linear regression we describe the model as: *y* = *w*<sub>0</sub> + *w*<sub>1</sub>*x* + *ϵ* where *ϵ* ∼ *N*(0, *σ*<sup>2</sup>). Where as in Bayesian regression we describe it as a normal distribution: *y* ∼ *N*(*w*<sub>0</sub> + *w*<sub>1</sub>*x*, 1/*β*), where *β* is known as the precision, and is a hyper-parameter.
+
+With an Bayesian approach we can include or assume a prior distribution, if we have some prior knowledge regarding the data. For this model the default prior distribution is *p*(*w*|*α*)=*N*(0, *α*<sup>−1</sup>*I*), where *α* is the precision parameter regarding the prior knowledge.
+
+When presented with a set of observations for x and y, *x*<sup>*T*</sup> = (*x*<sub>1</sub>, *x*<sub>2</sub>, …, *x*<sub>*n*</sub>) and *y*<sup>*T*</sup> = (*y*<sub>1</sub>, *y*<sub>2</sub>, …, *y*<sub>*n*</sub>), we want to update the prior and estimate what the weights/coefficients of the model are. Then we get the posterior distribution for the weights *p*(*w*|*x*, *y*, *α*, *β*)=*N*(*m*<sub>*x*, *y*</sub>, *S*<sub>*x*, *y*</sub>).
+
+To calculate the weights, which corresponds to *m*<sub>*x*, *y*</sub>, can be done using the equation: *m*<sub>*x*, *y*</sub> = *β* \* *S*<sub>*x*, *y*</sub> \* *ϕ*<sub>*x*</sub><sup>*T*</sup> \* *y*, where *ϕ*<sub>*x*</sub> is a model matrix the containing observations. It is structured such that for any observation i, it contains 1 and *x*<sub>*i*</sub>, for the intercept and the slope.
+
+To calculate the covariance, *S*<sub>*x*, *y*</sub> we have: *S*<sub>*x*, *y*</sub><sup>−1</sup> = *α*<sup>−1</sup>*I* + *β* \* *ϕ*<sub>*x*</sub><sup>*T*</sup> \* *ϕ*<sub>*x*</sub>, where *α*<sup>−1</sup>*I* corresponds to the prior distribution. The calculation is the inverse of the covariance matrix, and therefore inverting it gives us *S*<sub>*x*, *y*</sub>, however it is easier to calculate as the inverse.
+
+In the package the functions, which do these calculates are make\_prior and update\_prior. make\_prior initializes the prior *N*(0, *α*<sup>−1</sup>*I*) for a given *α* value. update\_prior uses the prior to calculate the posterior distribution *N*(*m*<sub>*x*, *y*</sub>, *S*<sub>*x*, *y*</sub>). In both of these we have two hyper-parameters, alpha (*α*) and beta (*β*), which relate to the precision of the measurements. Alpha decides the prior distribution, and beta affects the inclusion of new data.
+
+These parameters are important for small sample sizes, where they have an large effect. With the introduction of more data, their effect decreases.

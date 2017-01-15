@@ -52,7 +52,7 @@ library(blm)
 ```
 
 ```{r, echo=FALSE}
-x <- 1:100
+x <- rnorm(100, 50, 20)
 y <- rnorm(100, x)
 ```
 
@@ -77,15 +77,18 @@ Short and simple. Very straight forward.
 
 A list of features the package contains, and a short description of
 their purpose and function. For a more indepth description check the
-documentation with ?x.blm, or the github wiki page for the function.
+documentation with ?x, either for function, or follow the description
+of the generic documentation.
 
 * blm
 	* The core function of the package. Produces the Bayesian linear
       model (blm) and the blm object. It takes in the
-      parameters: blm(formula, alpha=1, beta=1, ...), where
+      parameters: blm(model, alpha=1, beta=1, prior=NULL, ...), where
       ... includes the parameter data, which allows the inclusion of a
       data.frame for the data in the formula. For an indepth look at
-      the function of alpha and beta, look at the next section.
+      the function of alpha and beta, look at the next section. The
+      prior parameter allows the user to specific more specially what
+      the prior is.
 * coef (coefficients)
 	* coef, gives the coefficients of the model when used on a blm
       class object. This returns a vector with the names of the coefficients.
@@ -134,7 +137,8 @@ lot of attributes. Here is a summary of attributes in the two objects.
 
 Finally there are two internal functions used for the actual Bayesian
 linear calculations. A description of how these functions work, and
-how parameters alpha and beta influence the results.
+how parameters alpha and beta influence the results, is explained in
+the next section.
 
 * make_prior
 	* Initialize the prior distribution. Usage is as follows:
@@ -151,5 +155,47 @@ how parameters alpha and beta influence the results.
 
 ### Bayesian properties
 
-A description of the Bayesian properties of the model, and two
-internal core functions, which do the Bayesian calculations.
+In The Bayesian model we do not directly estimate the value of the
+parameters, instead we estimate an normal distribution giving the mean
+and the variance for each of the parameters.
+
+In linear regression we describe the model as: $y = w_0 + w_1x +
+\epsilon$ where $\epsilon \sim N(0, \sigma^2)$. Where as in Bayesian
+regression  we describe it as a normal distribution: $y \sim N(w_0 +
+w_1x, 1/\beta)$, where $\beta$ is known as the precision, and is a
+hyper-parameter.
+
+With an Bayesian approach we can include or assume a prior
+distribution, if we have some prior knowledge regarding the data. For
+this model the default prior distribution is $p(w | \alpha) = N(0,
+\alpha^{-1}I)$, where $\alpha$ is the precision parameter regarding the prior
+knowledge.
+
+When presented with a set of observations for x and y, $x^{T}=(x_1,
+x_2, \ldots, x_n)$ and $y^{T}=(y_1, y_2, \ldots, y_n)$, we want to
+update the prior and estimate what the weights/coefficients of the
+model are. Then we get the posterior distribution for the weights $p(w
+| x, y, \alpha, \beta)  =  N(m_{x,y}, S_{x,y})$.
+
+To calculate the weights, which corresponds to $m_{x,y}$, can be done
+using the equation: $m_{x,y}=\beta*S_{x,y}*\phi_x^T*y$, where
+$\phi_x$ is a model matrix the containing observations. It is
+structured such that for any observation i, it contains 1 and $x_i$,
+for the intercept and the slope.
+
+To calculate the covariance, $S_{x,y}$ we have: $S_{x,y}^{-1} =
+\alpha^{-1}I + \beta*\phi_x^T*\phi_x$, where $\alpha^{-1}I$
+corresponds to the prior distribution. The calculation is the inverse
+of the covariance matrix, and therefore inverting it gives us
+$S_{x,y}$, however it is easier to calculate as the inverse.
+
+In the package the functions, which do these calculates are make_prior
+and update_prior. make_prior initializes the prior $N(0,
+\alpha^{-1}I)$ for a given $\alpha$ value. update_prior uses the prior
+to calculate the posterior distribution $N(m_{x,y}, S_{x,y})$. In both
+of these we have two hyper-parameters, alpha ($\alpha$) and beta
+($\beta$), which relate to the precision of the measurements. Alpha
+decides the prior distribution, and beta affects the inclusion of new data.
+
+These parameters are important for small sample sizes, where they have
+an large effect. With the introduction of more data, their effect decreases.

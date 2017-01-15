@@ -4,7 +4,7 @@
 \alias{blm}
 \title{Bayesian linear model.}
 \usage{
-blm(model, alpha = 1, beta = 1, ...)
+blm(model, alpha = 1, beta = 1, prior = NULL, ...)
 }
 \arguments{
 \item{model}{A formula describing the model.}
@@ -12,6 +12,8 @@ blm(model, alpha = 1, beta = 1, ...)
 \item{alpha}{Hyper-parameter for the prior}
 
 \item{beta}{Hyper-parameter for the accuracy of the data points.}
+
+\item{prior}{Provide a prior distribution, with structure list(mu, Sigma), where mu is a vector of means and Sigma is a covariance matrix. Needs to have the same dimensions as the}
 
 \item{...}{Additional data, for example a data frame.}
 }
